@@ -39,8 +39,7 @@ let package = Package(
                 "AboutFeatureDomain"
             ],
             resources: [
-                .copy("Resources/device_types.json"),
-                .copy("Resources/app_resources.json")
+                .copy("Resources/released_devices.json")
             ]
         ),
         .testTarget(
@@ -51,8 +50,8 @@ let package = Package(
                 "AboutFeatureData"
             ],
             resources: [
-                .copy("Resources/device_types.json"),
-                .copy("Resources/app_resources.json")
+                .copy("Resources/released_devices.json"),
+                .copy("Resources/template_app_resources.json")
             ]
         ),
     ]

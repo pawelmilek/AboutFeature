@@ -10,17 +10,17 @@ import Foundation
 import AboutFeatureDomain
 
 public struct LocalAppDataSource: AppDataSource {
-    private let name: String
-    private let fileExtension: String
+    private let localFileResource: LocalFileResource
+    private let decoder: JSONDecoder
 
-    public init() {
-        name = "app_resources"
-        fileExtension = "json"
+    public init(localFileResource: LocalFileResource, decoder: JSONDecoder) {
+        self.localFileResource = localFileResource
+        self.decoder = decoder
     }
 
     public func resources() async throws -> AppResources {
         let jsonData = try jsonData()
-        let resources = try JSONDecoder().decode(AppResources.self, from: jsonData)
+        let resources = try decoder.decode(AppResources.self, from: jsonData)
         return resources
     }
 
@@ -35,9 +35,9 @@ public struct LocalAppDataSource: AppDataSource {
     }
 
     private func fileURL() throws -> URL {
-        guard let path = Bundle.module.url(
-            forResource: name,
-            withExtension: fileExtension
+        guard let path = localFileResource.bundle.url(
+            forResource: localFileResource.name,
+            withExtension: localFileResource.fileExtension
         ) else {
             throw CocoaError(.fileNoSuchFile)
         }

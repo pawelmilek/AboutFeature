@@ -94,10 +94,10 @@ public final class AboutViewModel: ObservableObject {
                     body: SupportEmail.Body(
                         appName: appInfo.name,
                         appVersion: appInfo.version,
-                        deviceName: result.0,
+                        deviceName: result.1,
                         systemInfo: appInfo.system
                     ),
-                    recipient: result.1,
+                    recipient: result.0,
                     subject: "\(subject) \(appInfo.name)"
                 )
                 feedbackEmail.send(openURL: openURL)

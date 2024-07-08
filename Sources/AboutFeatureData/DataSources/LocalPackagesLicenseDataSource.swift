@@ -9,10 +9,10 @@
 import Foundation
 
 public struct LocalPackagesLicenseDataSource: LicenseDataSource {
-    private let licenseFile: LicenseFile
+    private let licenseFile: LocalFileResource
     private let bundle: Bundle
 
-    public init(licenseFile: LicenseFile, bundle: Bundle) {
+    public init(licenseFile: LocalFileResource, bundle: Bundle) {
         self.licenseFile = licenseFile
         self.bundle = bundle
     }

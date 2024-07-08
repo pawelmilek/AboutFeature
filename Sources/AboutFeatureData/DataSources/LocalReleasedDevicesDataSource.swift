@@ -10,17 +10,19 @@ import Foundation
 import AboutFeatureDomain
 
 public struct LocalReleasedDevicesDataSource: DevicesDataSource {
+    private let decoder: JSONDecoder
     private let name: String
     private let fileExtension: String
 
-    public init() {
-        name = "device_types"
-        fileExtension = "json"
+    public init(decoder: JSONDecoder) {
+        self.decoder = decoder
+        self.name = "released_devices"
+        self.fileExtension = "json"
     }
 
     public func devices() async throws -> [Device] {
         let jsonData = try jsonData()
-        let models = try JSONDecoder().decode([Device].self, from: jsonData)
+        let models = try decoder.decode([Device].self, from: jsonData)
         return models
     }
 

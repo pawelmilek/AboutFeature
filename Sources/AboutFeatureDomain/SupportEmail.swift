@@ -62,7 +62,7 @@ public final class SupportEmail {
     private var bodyContent: String {
       """
         Application: \(body.appName)
-        Version: "\(body.appVersion)"
+        Version: \(body.appVersion)
         Device: \(body.deviceName)
         \(body.systemInfo)
 
