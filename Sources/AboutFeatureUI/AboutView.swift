@@ -8,7 +8,6 @@
 
 import SwiftUI
 import StoreKit
-import AboutFeatureDomain
 
 public struct AboutView: View {
     @ObservedObject var viewModel: AboutViewModel
