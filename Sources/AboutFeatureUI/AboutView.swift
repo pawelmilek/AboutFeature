@@ -52,26 +52,30 @@ public struct AboutView: View {
                         title: "Compatibility",
                         content: viewModel.appCompatibility
                     )
-                    ShareRow(
-                        item: viewModel.shareURL(),
-                        tintColor: tintColor,
-                        accent: accentColor
-                    )
+                    if let appStoreShareURL = viewModel.appStoreShareURL {
+                        ShareRow(
+                            item: appStoreShareURL,
+                            tintColor: tintColor,
+                            accent: accentColor
+                        )
+                    }
                 } header: {
                     Text("App")
                 }
                 Section {
-                    AboutLinkRow(
-                        tintColor: tintColor,
-                        symbol: "apps.iphone",
-                        title: "Apps Preview",
-                        url: viewModel.appStorePreviewURL
-                    )
-                    .simultaneousGesture(TapGesture().onEnded() {
-                        viewModel.sendEventRowTapped("Apps Preview")
-                    })
-                    .popoverTip(AppStorePreviewTip(), arrowEdge: .bottom)
-                    .foregroundStyle(tintColor)
+                    if let appStorePreviewURL = viewModel.appStorePreviewURL {
+                        AboutLinkRow(
+                            tintColor: tintColor,
+                            symbol: "apps.iphone",
+                            title: "Apps Preview",
+                            url: appStorePreviewURL
+                        )
+                        .simultaneousGesture(TapGesture().onEnded() {
+                            viewModel.sendEventRowTapped("Apps Preview")
+                        })
+                        .popoverTip(AppStorePreviewTip(), arrowEdge: .bottom)
+                        .foregroundStyle(tintColor)
+                    }
                 } header: {
                     Text("App Store")
                 }
@@ -88,15 +92,17 @@ public struct AboutView: View {
                         title: "Report Issue",
                         action: reportIssue
                     )
-                    AboutLinkRow(
-                        tintColor: .yellow,
-                        symbol: "star.fill",
-                        title: "Rate Application",
-                        url: viewModel.writeAppStoreReviewURL
-                    )
-                    .simultaneousGesture(TapGesture().onEnded() {
-                        viewModel.sendEventRowTapped("Rate Application")
-                    })
+                    if let writeAppStoreReviewURL = viewModel.writeAppStoreReviewURL {
+                        AboutLinkRow(
+                            tintColor: .yellow,
+                            symbol: "star.fill",
+                            title: "Rate Application",
+                            url: writeAppStoreReviewURL
+                        )
+                        .simultaneousGesture(TapGesture().onEnded() {
+                            viewModel.sendEventRowTapped("Rate Application")
+                        })
+                    }
                 } header: {
                     Text("Feedback")
                 }
@@ -107,29 +113,33 @@ public struct AboutView: View {
                         symbol: "doc.plaintext.fill",
                         title: "Licenses",
                         destination: {
-                            LicenseView(content: viewModel.packagesLicense())
+                            LicenseView(content: viewModel.packagesLicenseContent)
                         }
                     )
-                    AboutLinkRow(
-                        tintColor: tintColor,
-                        symbol: "lock.shield.fill",
-                        title: "Privacy Policy",
-                        url: viewModel.privacyPolicyURL
-                    )
-                    .simultaneousGesture(TapGesture().onEnded() {
-                        viewModel.sendEventRowTapped("Privacy Policy")
-                    })
+                    if let privacyPolicyURL = viewModel.privacyPolicyURL {
+                        AboutLinkRow(
+                            tintColor: tintColor,
+                            symbol: "lock.shield.fill",
+                            title: "Privacy Policy",
+                            url: privacyPolicyURL
+                        )
+                        .simultaneousGesture(TapGesture().onEnded() {
+                            viewModel.sendEventRowTapped("Privacy Policy")
+                        })
+                    }
                 } header: {
                     Text("Documents")
                 }
 
                 Section {
-                    AboutLinkRow(
-                        tintColor: tintColor,
-                        symbol: "sun.haze.fill",
-                        title: "OpenWeather",
-                        url: viewModel.weatherDataProviderURL
-                    )
+                    if let dataProviderURL = viewModel.dataProviderURL {
+                        AboutLinkRow(
+                            tintColor: tintColor,
+                            symbol: "sun.haze.fill",
+                            title: "OpenWeather",
+                            url: dataProviderURL
+                        )
+                    }
                 } header: {
                     Text("Data Provider")
                 } footer: {
@@ -169,10 +179,10 @@ public struct AboutView: View {
     }
 
     private func reportFeedback() {
-        viewModel.reportFeedback(openURL)
+        viewModel.report(subject: "[Feedback]", openURL)
     }
 
     private func reportIssue() {
-        viewModel.reportIssue(openURL)
+        viewModel.report(subject: "[Bug]", openURL)
     }
 }

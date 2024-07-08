@@ -1,5 +1,5 @@
 //
-//  NetworkResourceRepository.swift
+//  LicenseDataSource.swift
 //  AboutFeature
 //
 //  Created by Pawel Milek on 7/7/24.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-public protocol NetworkResourceRepository {
-    func resources() throws -> [Resource]
+public protocol LicenseDataSource {
+    func content() async throws -> String
 }

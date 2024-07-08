@@ -1,5 +1,5 @@
 //
-//  LicenseDataSource.swift
+//  AppRepository.swift
 //  AboutFeature
 //
 //  Created by Pawel Milek on 7/7/24.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-public protocol LicenseDataSource {
-    func content() throws -> URL
+public protocol AppRepository {
+    func resources() async throws -> [Resource]
 }

@@ -1,5 +1,5 @@
 //
-//  PackageLicenseRepository.swift
+//  PackagesLicenseRepository.swift
 //  AboutFeature
 //
 //  Created by Pawel Milek on 12/24/23.
@@ -9,14 +9,14 @@
 import SwiftUI
 import AboutFeatureDomain
 
-public struct PackageLicenseRepository: LicenseRepository {
+public struct PackagesLicenseRepository: LicenseRepository {
     private let dataSource: LicenseDataSource
 
     public init(dataSource: LicenseDataSource) {
         self.dataSource = dataSource
     }
 
-    public func content() throws -> URL {
-        try dataSource.content()
+    public func content() async throws -> String {
+        try await dataSource.content()
     }
 }

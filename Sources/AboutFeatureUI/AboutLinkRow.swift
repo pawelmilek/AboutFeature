@@ -12,11 +12,11 @@ struct AboutLinkRow: View {
     let tintColor: Color
     let symbol: String
     let title: String
-    let url: URL?
+    let url: URL
 
     var body: some View {
         Button(action: {}, label: {
-            Link(destination: url!, label: {
+            Link(destination: url, label: {
                 labelView
             })
         })

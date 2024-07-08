@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol DevicesRepository {
-    func devices() throws -> [Device]
+    func devices() async throws -> [Device]
 }

@@ -16,9 +16,9 @@ public struct UserDeviceService: DeviceService {
         self.repository = repository
     }
 
-    public func deviceName(with id: String) -> String {
-        let devices = try? repository.devices()
-        let userDevice = devices?.first(where: { $0.identifier == id }) ?? Device(identifier: id, model: id)
+    public func deviceName(with id: String) async throws -> String {
+        let devices = try await repository.devices()
+        let userDevice = devices.first(where: { $0.identifier == id }) ?? Device(identifier: id, model: id)
         return userDevice.model
     }
 }

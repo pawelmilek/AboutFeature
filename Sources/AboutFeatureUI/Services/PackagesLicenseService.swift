@@ -15,7 +15,7 @@ public struct PackagesLicenseService: LicenseService {
         self.repository = repository
     }
 
-    public func content() throws -> URL {
-        try repository.content()
+    public func content() async throws -> String {
+        try await repository.content()
     }
 }

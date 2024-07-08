@@ -1,5 +1,5 @@
 //
-//  AppNetworkResources.swift
+//  AppResources.swift
 //  AboutFeature
 //
 //  Created by Pawel Milek on 7/7/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct AppNetworkResources: Decodable {
+public struct AppResources: Decodable {
     public let appIdentifier: String
     public let resources: [Resource]
 

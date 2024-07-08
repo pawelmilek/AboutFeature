@@ -6,17 +6,15 @@
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
 import WebKit
 
 struct HTMLView: UIViewRepresentable {
     typealias UIViewType = WKWebView
+    private let content: String?
 
-    private let fileURL: URL?
-
-    init(fileURL: URL?) {
-        self.fileURL = fileURL
+    init(content: String?) {
+        self.content = content
     }
 
     func makeUIView(context: Context) -> WKWebView {
@@ -27,7 +25,7 @@ struct HTMLView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: WKWebView, context: Context) {
-        guard let fileURL else { return }
-        uiView.loadFileURL(fileURL, allowingReadAccessTo: fileURL)
+        guard let content else { return }
+        uiView.loadHTMLString(content, baseURL: nil)
     }
 }

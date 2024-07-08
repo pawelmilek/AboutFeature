@@ -1,5 +1,5 @@
 //
-//  LocalNetworkResourceDataSource.swift
+//  LocalReleasedDevicesDataSource.swift
 //  AboutFeature
 //
 //  Created by Pawel Milek on 7/7/24.
@@ -9,19 +9,19 @@
 import Foundation
 import AboutFeatureDomain
 
-public struct LocalNetworkResourceDataSource: NetworkResourceDataSource {
+public struct LocalReleasedDevicesDataSource: DevicesDataSource {
     private let name: String
     private let fileExtension: String
 
     public init() {
-        name = "app_network_resources"
+        name = "device_types"
         fileExtension = "json"
     }
 
-    public func resources() throws -> AppNetworkResources {
+    public func devices() async throws -> [Device] {
         let jsonData = try jsonData()
-        let resources = try JSONDecoder().decode(AppNetworkResources.self, from: jsonData)
-        return resources
+        let models = try JSONDecoder().decode([Device].self, from: jsonData)
+        return models
     }
 
     private func jsonData() throws -> Data {

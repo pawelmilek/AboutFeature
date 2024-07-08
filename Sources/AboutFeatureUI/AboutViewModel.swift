@@ -14,15 +14,17 @@ public final class AboutViewModel: ObservableObject {
     @Published private(set) var appName = ""
     @Published private(set) var appVersion = ""
     @Published private(set) var appCompatibility = ""
+    @Published private(set) var packagesLicenseContent = ""
+    @Published private(set) var appStoreShareURL: URL?
     @Published private(set) var appStorePreviewURL: URL?
     @Published private(set) var writeAppStoreReviewURL: URL?
     @Published private(set) var privacyPolicyURL: URL?
-    @Published private(set) var weatherDataProviderURL: URL?
+    @Published private(set) var dataProviderURL: URL?
     @Published private(set) var currentYear = ""
     private let appInfo: ApplicationInfo
     private let analytics: AnalyticsAboutSendable
     private let toolbarInteractive: ToolbarInteractive
-    private let networkResourceService: NetworkResourceService
+    private let appService: AppService
     private let deviceService: DeviceService
     private let licenseService: LicenseService
 
@@ -30,14 +32,14 @@ public final class AboutViewModel: ObservableObject {
         appInfo: ApplicationInfo,
         analytics: AnalyticsAboutSendable,
         toolbarInteractive: ToolbarInteractive,
-        networkResourceService: NetworkResourceService,
+        appService: AppService,
         deviceService: DeviceService,
         licenseService: LicenseService
     ) {
         self.appInfo = appInfo
         self.analytics = analytics
         self.toolbarInteractive = toolbarInteractive
-        self.networkResourceService = networkResourceService
+        self.appService = appService
         self.deviceService = deviceService
         self.licenseService = licenseService
         self.currentYear = Date.now.formatted(.dateTime.year())
@@ -48,20 +50,32 @@ public final class AboutViewModel: ObservableObject {
 
     func onViewAppear() {
         fetchAppNetworkResources()
+        fetchPackagesLicense()
     }
 
     private func fetchAppNetworkResources() {
-        appStorePreviewURL = try? networkResourceService.appStorePreviewURL()
-        writeAppStoreReviewURL = try? networkResourceService.appStoreReviewURL()
-        privacyPolicyURL = try? networkResourceService.privacyPolicyURL()
-        weatherDataProviderURL = try? networkResourceService.weatherServiceURL()
+        Task {
+            async let appStorePreviewURL = appService.appStorePreviewURL()
+            async let writeAppStoreReviewURL = appService.appStoreReviewURL()
+            async let privacyPolicyURL = appService.privacyPolicyURL()
+            async let dataProviderURL = appService.dataProviderURL()
+            async let appStoreShareURL = appService.appStoreShareURL()
+
+            self.appStorePreviewURL = try? await appStorePreviewURL
+            self.writeAppStoreReviewURL = try? await writeAppStoreReviewURL
+            self.privacyPolicyURL = try? await privacyPolicyURL
+            self.dataProviderURL = try? await dataProviderURL
+            self.appStoreShareURL = try? await appStoreShareURL
+        }
     }
 
-    func packagesLicense() -> URL {
-        do {
-            return try licenseService.content()
-        } catch {
-            fatalError(error.localizedDescription)
+    func fetchPackagesLicense() {
+        Task {
+            do {
+                packagesLicenseContent = try await licenseService.content()
+            } catch {
+                fatalError(error.localizedDescription)
+            }
         }
     }
 
@@ -69,42 +83,28 @@ public final class AboutViewModel: ObservableObject {
         toolbarInteractive.doneItemTapped()
     }
 
-    func reportFeedback(_ openURL: OpenURLAction) {
-        guard let recipient = try? networkResourceService.supportEmail() else { return }
+    func report(subject: String, _ openURL: OpenURLAction) {
+        Task {
+            do {
+                async let recipient = appService.supportEmail()
+                async let deviceName = deviceService.deviceName(with: appInfo.deviceId)
+                let result = try await (recipient, deviceName)
 
-        let feedbackEmail = SupportEmail(
-            body: emailBody,
-            recipient: recipient,
-            subject: "[Feedback] \(appInfo.name)"
-        )
-        feedbackEmail.send(openURL: openURL)
-    }
+                let feedbackEmail = SupportEmail(
+                    body: SupportEmail.Body(
+                        appName: appInfo.name,
+                        appVersion: appInfo.version,
+                        deviceName: result.0,
+                        systemInfo: appInfo.system
+                    ),
+                    recipient: result.1,
+                    subject: "\(subject) \(appInfo.name)"
+                )
+                feedbackEmail.send(openURL: openURL)
 
-    func reportIssue(_ openURL: OpenURLAction) {
-        guard let recipient = try? networkResourceService.supportEmail() else { return }
-
-        let bugEmail = SupportEmail(
-            body: emailBody,
-            recipient: recipient,
-            subject: "[Bug] \(appInfo.name)"
-        )
-        bugEmail.send(openURL: openURL)
-    }
-
-    private var emailBody: SupportEmail.Body {
-        SupportEmail.Body(
-            appName: appInfo.name,
-            appVersion: appInfo.version,
-            deviceName: deviceService.deviceName(with: appInfo.deviceId),
-            systemInfo: appInfo.system
-        )
-    }
-
-    func shareURL() -> URL {
-        do {
-            return try networkResourceService.appStoreShareURL()
-        } catch {
-            fatalError(error.localizedDescription)
+            } catch {
+                fatalError(error.localizedDescription)
+            }
         }
     }
 

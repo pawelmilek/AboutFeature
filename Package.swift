@@ -40,8 +40,7 @@ let package = Package(
             ],
             resources: [
                 .copy("Resources/device_types.json"),
-                .copy("Resources/app_network_resources.json"),
-                .copy("Resources/packages_license.html")
+                .copy("Resources/app_resources.json")
             ]
         ),
         .testTarget(
@@ -53,8 +52,7 @@ let package = Package(
             ],
             resources: [
                 .copy("Resources/device_types.json"),
-                .copy("Resources/app_network_resources.json"),
-                .copy("Resources/packages_license.html")
+                .copy("Resources/app_resources.json")
             ]
         ),
     ]

@@ -1,5 +1,5 @@
 //
-//  DeviceService.swift
+//  LicenseService.swift
 //  AboutFeature
 //
 //  Created by Pawel Milek on 7/7/24.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-public protocol DeviceService {
-    func deviceName(with id: String) -> String
+public protocol LicenseService {
+    func content() async throws -> String
 }

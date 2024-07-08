@@ -18,7 +18,7 @@
             "content": "https://apps.apple.com/us/developer/pawel-milek/id1139599148"
         },
         {
-            "name": "weatherService",
+            "name": "dataProvider",
             "content": "https://openweathermap.org"
         },
         {

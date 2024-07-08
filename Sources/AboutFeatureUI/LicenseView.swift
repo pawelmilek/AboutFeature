@@ -10,10 +10,10 @@
 import SwiftUI
 
 struct LicenseView: View {
-    let content: URL
+    let content: String
 
     var body: some View {
-        HTMLView(fileURL: content)
+        HTMLView(content: content)
             .padding(.top, 1)
             .navigationBarTitle("Licenses")
             .navigationBarTitleDisplayMode(.inline)

@@ -16,7 +16,7 @@ public struct ReleasedDevicesRepository: DevicesRepository {
         self.dataSource = dataSource
     }
 
-    public func devices() throws -> [Device] {
-        try dataSource.devices()
+    public func devices() async throws -> [Device] {
+        try await dataSource.devices()
     }
 }

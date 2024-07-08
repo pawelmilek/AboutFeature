@@ -9,5 +9,5 @@
 import Foundation
 
 public protocol LicenseRepository {
-    func content() throws -> URL
+    func content() async throws -> String
 }
