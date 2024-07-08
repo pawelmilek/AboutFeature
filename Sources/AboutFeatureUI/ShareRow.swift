@@ -1,6 +1,6 @@
 //
 //  ShareRow.swift
-//  Swifty Forecast
+//  AboutFeature
 //
 //  Created by Pawel Milek on 6/1/24.
 //  Copyright © 2024 Pawel Milek. All rights reserved.

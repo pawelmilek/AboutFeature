@@ -1,6 +1,6 @@
 //
 //  HTMLView.swift
-//  Swifty Forecast
+//  AboutFeature
 //
 //  Created by Pawel Milek on 12/25/23.
 //  Copyright © 2023 Pawel Milek. All rights reserved.
