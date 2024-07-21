@@ -178,10 +178,22 @@ public struct AboutView: View {
     }
 
     private func reportFeedback() {
-        viewModel.report(subject: "[Feedback]", openURL)
+        viewModel.report(subject: "[Feedback]") { mailToURL in
+            openURL(mailToURL) { accepted in
+                if !accepted {
+                    debugPrint("Device doesn't support email.")
+                }
+            }
+        }
     }
 
     private func reportIssue() {
-        viewModel.report(subject: "[Bug]", openURL)
+        viewModel.report(subject: "[Bug]") { mailToURL in
+            openURL(mailToURL) { accepted in
+                if !accepted {
+                    debugPrint("Device doesn't support email.")
+                }
+            }
+        }
     }
 }

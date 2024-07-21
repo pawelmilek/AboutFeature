@@ -6,7 +6,7 @@
 //  Copyright © 2024 Pawel Milek. All rights reserved.
 //
 
-import SwiftUI
+import Foundation
 import AboutFeatureDomain
 
 @MainActor
@@ -83,7 +83,7 @@ public final class AboutViewModel: ObservableObject {
         toolbarInteractive.doneItemTapped()
     }
 
-    func report(subject: String, _ openURL: OpenURLAction) {
+    func report(subject: String, _ openURL: @escaping (URL) -> Void) {
         Task {
             do {
                 async let recipient = appService.supportEmail()
@@ -101,22 +101,12 @@ public final class AboutViewModel: ObservableObject {
                     subject: "\(subject) \(appInfo.name)"
                 )
 
-                send(mailTo: feedbackEmail.mailToURL, openURL: openURL)
+                if let mailToURL = feedbackEmail.mailToURL {
+                    openURL(mailToURL)
+                }
 
             } catch {
                 fatalError(error.localizedDescription)
-            }
-        }
-    }
-
-    private func send(mailTo: URL?, openURL: OpenURLAction) {
-        guard let mailTo else {
-            fatalError("Feedback email does not exist.")
-        }
-
-        openURL(mailTo) { accepted in
-            if !accepted {
-                debugPrint("Device doesn't support email.")
             }
         }
     }
