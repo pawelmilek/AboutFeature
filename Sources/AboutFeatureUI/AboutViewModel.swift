@@ -100,10 +100,23 @@ public final class AboutViewModel: ObservableObject {
                     recipient: result.0,
                     subject: "\(subject) \(appInfo.name)"
                 )
-                feedbackEmail.send(openURL: openURL)
+
+                send(mailTo: feedbackEmail.mailToURL, openURL: openURL)
 
             } catch {
                 fatalError(error.localizedDescription)
+            }
+        }
+    }
+
+    private func send(mailTo: URL?, openURL: OpenURLAction) {
+        guard let mailTo else {
+            fatalError("Feedback email does not exist.")
+        }
+
+        openURL(mailTo) { accepted in
+            if !accepted {
+                debugPrint("Device doesn't support email.")
             }
         }
     }
@@ -113,9 +126,8 @@ public final class AboutViewModel: ObservableObject {
         analytics.send(name: event.name, metadata: event.metadata)
     }
 
-    func sendEventScreen(className: String) {
+    func sendEventScreenViewed(className: String) {
         let event = AboutAnalyticsEvent.screenViewed(className: className)
         analytics.send(name: event.name, metadata: event.metadata)
     }
-
 }

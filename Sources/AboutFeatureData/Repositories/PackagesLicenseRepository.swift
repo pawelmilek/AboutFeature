@@ -6,7 +6,6 @@
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
 
-import SwiftUI
 import AboutFeatureDomain
 
 public struct PackagesLicenseRepository: LicenseRepository {

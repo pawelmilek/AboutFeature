@@ -1,5 +1,5 @@
 //
-//  LocalPackagesLicenseDataSource.swift
+//  LocalLicenseDataSource.swift
 //  AboutFeature
 //
 //  Created by Pawel Milek on 7/7/24.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct LocalPackagesLicenseDataSource: LicenseDataSource {
+public struct LocalLicenseDataSource: LicenseDataSource {
     private let licenseFile: LocalFileResource
     private let bundle: Bundle
 

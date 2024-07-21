@@ -171,7 +171,7 @@ public struct AboutView: View {
         }
         .onAppear {
             viewModel.onViewAppear()
-            viewModel.sendEventScreen(
+            viewModel.sendEventScreenViewed(
                 className: "\(type(of: self))"
             )
         }

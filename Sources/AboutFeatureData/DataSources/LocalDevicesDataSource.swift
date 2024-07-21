@@ -1,5 +1,5 @@
 //
-//  LocalReleasedDevicesDataSource.swift
+//  LocalDevicesDataSource.swift
 //  AboutFeature
 //
 //  Created by Pawel Milek on 7/7/24.
@@ -9,7 +9,7 @@
 import Foundation
 import AboutFeatureDomain
 
-public struct LocalReleasedDevicesDataSource: DevicesDataSource {
+public struct LocalDevicesDataSource: DevicesDataSource {
     private let decoder: JSONDecoder
     private let name: String
     private let fileExtension: String

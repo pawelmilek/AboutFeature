@@ -7,10 +7,8 @@
 //
 
 import Foundation
-import SwiftUI
 
-@MainActor
-public final class SupportEmail {
+public struct SupportEmail {
     public struct Body {
         let appName: String
         let appVersion: String
@@ -40,18 +38,7 @@ public final class SupportEmail {
         self.subject = subject
     }
 
-    public func send(openURL: OpenURLAction) {
-        guard let mailToURL else { return }
-
-        openURL(mailToURL) { [weak self] accepted in
-            guard let self else { return }
-            if !accepted {
-                print("Device doesn't support email.\n \(body)")
-            }
-        }
-    }
-
-    private var mailToURL: URL? {
+    public var mailToURL: URL? {
         let replacedSubject = subject.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         let replacedBody = bodyContent.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? ""
         let urlString = "mailto:\(recipient)?subject=\(replacedSubject)&body=\(replacedBody)"
