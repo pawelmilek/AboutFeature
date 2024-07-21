@@ -10,5 +10,5 @@ import Foundation
 import AboutFeatureDomain
 
 public protocol DevicesDataSource {
-    func devices() async throws -> [Device]
+    func devices() async throws -> Data
 }

@@ -11,27 +11,16 @@ import AboutFeatureDomain
 
 public struct LocalAppDataSource: AppDataSource {
     private let localFileResource: LocalFileResource
-    private let decoder: JSONDecoder
 
-    public init(localFileResource: LocalFileResource, decoder: JSONDecoder) {
+    public init(
+        localFileResource: LocalFileResource
+    ) {
         self.localFileResource = localFileResource
-        self.decoder = decoder
     }
 
-    public func resources() async throws -> AppResources {
-        let jsonData = try jsonData()
-        let resources = try decoder.decode(AppResources.self, from: jsonData)
-        return resources
-    }
-
-    private func jsonData() throws -> Data {
-        do {
-            let url = try fileURL()
-            let data = try Data(contentsOf: url)
-            return data
-        } catch {
-            throw error
-        }
+    public func resources() async throws -> Data {
+        let url = try fileURL()
+        return try Data(contentsOf: url)
     }
 
     private func fileURL() throws -> URL {

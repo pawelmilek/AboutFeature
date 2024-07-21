@@ -11,12 +11,16 @@ import AboutFeatureDomain
 
 public struct ReleasedDevicesRepository: DevicesRepository {
     private let dataSource: DevicesDataSource
+    private let decoder: JSONDecoder
 
-    public init(dataSource: DevicesDataSource) {
+    public init(dataSource: DevicesDataSource, decoder: JSONDecoder) {
         self.dataSource = dataSource
+        self.decoder = decoder
     }
 
     public func devices() async throws -> [Device] {
-        try await dataSource.devices()
+        let data = try await dataSource.devices()
+        let models = try decoder.decode([Device].self, from: data)
+        return models
     }
 }

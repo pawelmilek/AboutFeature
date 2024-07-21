@@ -11,12 +11,19 @@ import AboutFeatureDomain
 
 public struct NetworkAppRepository: AppRepository {
     private let dataSource: AppDataSource
+    private let decoder: JSONDecoder
 
-    public init(dataSource: AppDataSource) {
+    public init(
+        dataSource: AppDataSource,
+        decoder: JSONDecoder
+    ) {
         self.dataSource = dataSource
+        self.decoder = decoder
     }
 
     public func resources() async throws -> [Resource] {
-        try await dataSource.resources().resources
+        let data = try await dataSource.resources()
+        let appResources = try decoder.decode(AppResources.self, from: data)
+        return appResources.resources
     }
 }

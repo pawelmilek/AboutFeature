@@ -11,5 +11,5 @@ import Foundation
 import AboutFeatureDomain
 
 public protocol AppDataSource {
-    func resources() async throws -> AppResources
+    func resources() async throws -> Data
 }

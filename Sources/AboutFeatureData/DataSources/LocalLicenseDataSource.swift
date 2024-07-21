@@ -10,15 +10,13 @@ import Foundation
 
 public struct LocalLicenseDataSource: LicenseDataSource {
     private let licenseFile: LocalFileResource
-    private let bundle: Bundle
 
-    public init(licenseFile: LocalFileResource, bundle: Bundle) {
+    public init(licenseFile: LocalFileResource) {
         self.licenseFile = licenseFile
-        self.bundle = bundle
     }
 
     public func content() async throws -> String {
-        guard let url = bundle.url(
+        guard let url = licenseFile.bundle.url(
             forResource: licenseFile.name,
             withExtension: licenseFile.fileExtension
         ) else {
