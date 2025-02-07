@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AboutFeatureDomain
+import Domain
 
 public struct NetworkAppRepository: AppRepository {
     private let dataSource: AppDataSource

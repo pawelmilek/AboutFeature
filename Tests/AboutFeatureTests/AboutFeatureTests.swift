@@ -1,7 +1,7 @@
 import XCTest
-@testable import AboutFeatureUI
-@testable import AboutFeatureDomain
-@testable import AboutFeatureData
+@testable import Presentation
+@testable import Domain
+@testable import Data
 
 final class AboutFeatureTests: XCTestCase {
     func testExample() throws {

@@ -6,7 +6,7 @@
 //  Copyright © 2023 Pawel Milek. All rights reserved.
 //
 
-import AboutFeatureDomain
+import Domain
 
 public struct PackagesLicenseRepository: LicenseRepository {
     private let dataSource: LicenseDataSource

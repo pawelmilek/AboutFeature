@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AboutFeatureDomain
+import Domain
 
 public struct LocalDevicesDataSource: DevicesDataSource {
     private let releasedDevicesFile: LocalFileResource

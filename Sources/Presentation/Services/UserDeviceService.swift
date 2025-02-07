@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AboutFeatureDomain
+import Domain
 
 public struct UserDeviceService: DeviceService {
     private let repository: DevicesRepository

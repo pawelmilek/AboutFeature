@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import AboutFeatureDomain
+import Domain
 
 @MainActor
 public final class AboutViewModel: ObservableObject {
