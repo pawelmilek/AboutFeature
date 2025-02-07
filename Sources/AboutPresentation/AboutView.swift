@@ -154,18 +154,10 @@ public struct AboutView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button {
+                    CloseButton(foreground: accentColor, background: tintColor) {
                         dismiss()
                         viewModel.doneItemTapped()
-                    } label: {
-                        Text("Done")
-                            .fontDesign(.monospaced)
-                            .fontWeight(.semibold)
                     }
-                    .tint(accentColor)
-                    .buttonStyle(.bordered)
-                    .buttonBorderShape(.capsule)
-                    .controlSize(.small)
                 }
             }
         }
@@ -196,10 +188,4 @@ public struct AboutView: View {
             }
         }
     }
-}
-
-#Preview {
-    Text("Preview")
-//    AboutView()
-//        .environmentObject(Preview.viewModel)
 }
