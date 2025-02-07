@@ -197,3 +197,8 @@ public struct AboutView: View {
         }
     }
 }
+
+#Preview {
+    AboutView()
+        .environmentObject(Preview.viewModel)
+}
