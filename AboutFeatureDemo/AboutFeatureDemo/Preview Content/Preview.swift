@@ -6,9 +6,9 @@
 //
 
 import Foundation
-import Presentation
-import Domain
-import Data
+import AboutPresentation
+import AboutDomain
+import AboutData
 
 @MainActor
 enum Preview {

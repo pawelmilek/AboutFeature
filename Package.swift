@@ -15,9 +15,9 @@ let package = Package(
         .library(
             name: "AboutFeature",
             targets: [
-                "Presentation",
-                "Domain",
-                "Data"
+                "AboutPresentation",
+                "AboutDomain",
+                "AboutData"
             ]
         ),
     ],
@@ -25,18 +25,18 @@ let package = Package(
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Presentation",
+            name: "AboutPresentation",
             dependencies: [
-                "Domain"
+                "AboutDomain"
             ]        
         ),
         .target(
-            name: "Domain"
+            name: "AboutDomain"
         ),
         .target(
-            name: "Data",
+            name: "AboutData",
             dependencies: [
-                "Domain"
+                "AboutDomain"
             ],
             resources: [
                 .copy("Resources/released_devices.json")
@@ -45,9 +45,9 @@ let package = Package(
         .testTarget(
             name: "AboutFeatureTests",
             dependencies: [
-                "Presentation",
-                "Domain",
-                "Data"
+                "AboutPresentation",
+                "AboutDomain",
+                "AboutData"
             ],
             resources: [
                 .copy("Resources/released_devices.json"),

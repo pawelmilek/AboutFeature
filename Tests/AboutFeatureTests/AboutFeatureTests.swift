@@ -1,6 +1,6 @@
 import XCTest
 @testable import Presentation
-@testable import Domain
+@testable import AboutDomain
 @testable import Data
 
 final class AboutFeatureTests: XCTestCase {

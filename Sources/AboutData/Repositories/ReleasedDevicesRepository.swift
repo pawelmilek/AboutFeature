@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Domain
+import AboutDomain
 
 public struct ReleasedDevicesRepository: DevicesRepository {
     private let dataSource: DevicesDataSource

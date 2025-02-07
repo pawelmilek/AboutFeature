@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Presentation
+import AboutPresentation
 
 struct ContentView: View {
     @EnvironmentObject private var viewMdoel: AboutViewModel

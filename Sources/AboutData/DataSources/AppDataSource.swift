@@ -8,7 +8,7 @@
 
 
 import Foundation
-import Domain
+import AboutDomain
 
 public protocol AppDataSource {
     func resources() async throws -> Data

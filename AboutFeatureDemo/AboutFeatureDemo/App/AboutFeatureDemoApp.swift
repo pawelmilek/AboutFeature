@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
-import Presentation
-import Domain
-import Data
+import AboutPresentation
+import AboutDomain
+import AboutData
 
 @main
 struct AboutFeatureDemoApp: App {

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Domain
+import AboutDomain
 
 public struct NetworkAppService: AppService {
     private enum Names {

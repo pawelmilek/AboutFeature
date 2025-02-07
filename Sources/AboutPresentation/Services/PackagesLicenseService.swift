@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Domain
+import AboutDomain
 
 public struct PackagesLicenseService: LicenseService {
     private let repository: LicenseRepository

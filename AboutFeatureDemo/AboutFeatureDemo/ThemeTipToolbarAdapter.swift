@@ -5,7 +5,7 @@
 //  Created by Pawel Milek on 2/7/25.
 //
 
-import Presentation
+import AboutPresentation
 
 struct ThemeTipToolbarAdapter: ToolbarInteractive {
     func doneItemTapped() {
