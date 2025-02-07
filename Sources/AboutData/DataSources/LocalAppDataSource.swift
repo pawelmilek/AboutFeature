@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import AboutDomain
 
 public struct LocalAppDataSource: AppDataSource {
     private let localFileResource: LocalFileResource

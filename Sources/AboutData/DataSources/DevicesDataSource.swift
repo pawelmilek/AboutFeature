@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import AboutDomain
 
 public protocol DevicesDataSource {
     func devices() async throws -> Data
