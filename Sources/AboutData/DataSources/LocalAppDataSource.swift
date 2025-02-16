@@ -11,9 +11,7 @@ import Foundation
 public struct LocalAppDataSource: AppDataSource {
     private let localFileResource: LocalFileResource
 
-    public init(
-        localFileResource: LocalFileResource
-    ) {
+    public init(localFileResource: LocalFileResource) {
         self.localFileResource = localFileResource
     }
 

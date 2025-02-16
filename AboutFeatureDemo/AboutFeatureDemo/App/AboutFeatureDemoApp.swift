@@ -13,7 +13,6 @@ import AboutData
 @main
 struct AboutFeatureDemoApp: App {
     @StateObject private var viewModel = AboutViewModel(
-        appInfo: BundledApplicationInfo(bundle: .main, currentDevice: .current),
         analytics: FirebaseAnalyticsAboutAdapter(),
         toolbarInteractive: ThemeTipToolbarAdapter(),
         appService: NetworkAppService(

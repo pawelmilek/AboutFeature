@@ -13,10 +13,7 @@ public struct NetworkAppRepository: AppRepository {
     private let dataSource: AppDataSource
     private let decoder: JSONDecoder
 
-    public init(
-        dataSource: AppDataSource,
-        decoder: JSONDecoder
-    ) {
+    public init(dataSource: AppDataSource, decoder: JSONDecoder) {
         self.dataSource = dataSource
         self.decoder = decoder
     }

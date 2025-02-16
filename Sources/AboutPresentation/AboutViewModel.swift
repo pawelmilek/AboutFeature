@@ -8,6 +8,7 @@
 
 import Foundation
 import AboutDomain
+import UIKit
 
 @MainActor
 public final class AboutViewModel: ObservableObject {
@@ -29,20 +30,25 @@ public final class AboutViewModel: ObservableObject {
     private let licenseService: LicenseService
 
     public init(
-        appInfo: ApplicationInfo,
         analytics: AnalyticsAboutSendable,
         toolbarInteractive: ToolbarInteractive,
         appService: AppService,
         deviceService: DeviceService,
         licenseService: LicenseService
     ) {
-        self.appInfo = appInfo
         self.analytics = analytics
         self.toolbarInteractive = toolbarInteractive
         self.appService = appService
         self.deviceService = deviceService
         self.licenseService = licenseService
         self.currentYear = Date.now.formatted(.dateTime.year())
+        self.appInfo = ApplicationInfo(
+            name: Bundle.main.applicationName,
+            version: "\(Bundle.main.versionNumber) (\(Bundle.main.buildNumber))",
+            deviceId: UIDevice.current.identifier,
+            system: "\(UIDevice.current.systemName): \(UIDevice.current.systemVersion)",
+            compatibility: "iOS \(Bundle.main.minimumOSVersion)"
+        )
         self.appName = appInfo.name
         self.appVersion = appInfo.version
         self.appCompatibility = appInfo.compatibility

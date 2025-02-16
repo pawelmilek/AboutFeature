@@ -14,7 +14,6 @@ import AboutData
 enum Preview {
     static var viewModel: AboutViewModel {
         AboutViewModel(
-            appInfo: BundledApplicationInfo(bundle: .main, currentDevice: .current),
             analytics: FirebaseAnalyticsAboutAdapter(),
             toolbarInteractive: ThemeTipToolbarAdapter(),
             appService: NetworkAppService(
